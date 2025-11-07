@@ -16,10 +16,20 @@
     .divInput {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 10%;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
     }
 
     li {
+        display: flex;
+        flex-direction: column;
+    }
+
+    li>div {
         display: flex;
         flex-direction: column;
     }
@@ -40,7 +50,7 @@
             let divInput = document.createElement('div')
             divInput.className = "divInput"
             let buttonAdicionar = document.createElement('button')
-            buttonAdicionar.textContent = 'Adicionar'
+            buttonAdicionar.textContent = 'Adicionar outra lista'
 
             buttonAdicionar.addEventListener('click', () => {
                 let ulLista = document.createElement('ul')
@@ -48,7 +58,8 @@
                 if (input.value == "") {
                     return
                 }
-                li.innerHTML = `<p>${input.value}</p><button onclick="adicionarCartao(this)">Adicionar Cartão</button>`
+
+                li.innerHTML = `<p>${input.value}</p><button onclick="adicionarCartao(this)">Adicionar outro cartão</button>`
 
                 ulLista.appendChild(li)
                 divInput.appendChild(ulLista)
@@ -63,22 +74,24 @@
             let li = botao.parentElement
             let input = document.createElement('input')
             let divInput = document.createElement('div')
+
             let buttonAdicionar = document.createElement('button')
             buttonAdicionar.textContent = 'Adicionar cartão'
 
             buttonAdicionar.addEventListener('click', () => {
-
                 if (input.value == "") {
                     return
                 }
+
                 let divCartao = document.createElement('div')
                 divCartao.textContent = input.value
-                li.appendChild(divCartao)
+                divInput.appendChild(divCartao)
+                li.appendChild(divInput)
             })
 
-            li.appendChild(input)
-            li.appendChild(buttonAdicionar)
-
+            divInput.appendChild(input)
+            divInput.appendChild(buttonAdicionar)
+            li.appendChild(divInput)
 
         }
 
