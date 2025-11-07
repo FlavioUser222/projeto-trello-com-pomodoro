@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRELLO POMODORO</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .divInput {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+    }
+
+    li {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<body>
+
+    <div class="container" id="container">
+        <button onclick="adicionarLista()">Adicionar outra lista</button>
+    </div>
+
+    <script>
+
+        function adicionarLista() {
+            let container = document.getElementById('container')
+            let input = document.createElement('input')
+            input.className = "tarefa1"
+            let divInput = document.createElement('div')
+            divInput.className = "divInput"
+            let buttonAdicionar = document.createElement('button')
+            buttonAdicionar.textContent = 'Adicionar'
+
+            buttonAdicionar.addEventListener('click', () => {
+                let ulLista = document.createElement('ul')
+                let li = document.createElement('li')
+                if (input.value == "") {
+                    return
+                }
+                li.innerHTML = `<p>${input.value}</p><button onclick="adicionarCartao(this)">Adicionar Cartão</button>`
+
+                ulLista.appendChild(li)
+                divInput.appendChild(ulLista)
+            })
+
+            divInput.appendChild(input)
+            divInput.appendChild(buttonAdicionar)
+            container.appendChild(divInput)
+        }
+
+        function adicionarCartao(botao) {
+            let li = botao.parentElement
+            let input = document.createElement('input')
+            let divInput = document.createElement('div')
+            let buttonAdicionar = document.createElement('button')
+            buttonAdicionar.textContent = 'Adicionar cartão'
+
+            buttonAdicionar.addEventListener('click', () => {
+
+                if (input.value == "") {
+                    return
+                }
+                let divCartao = document.createElement('div')
+                divCartao.textContent = input.value
+                li.appendChild(divCartao)
+            })
+
+            li.appendChild(input)
+            li.appendChild(buttonAdicionar)
+
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>
