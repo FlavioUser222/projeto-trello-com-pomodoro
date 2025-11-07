@@ -54,61 +54,60 @@
     </header>
 
     <div class="container" id="container">
-        <button onclick="adicionarLista()" id="adicionarLista">Adicionar outra lista</button>
+        <button id="adicionarLista">Adicionar outra lista</button>
     </div>
 
     <script>
 
+        document.getElementById('adicionarLista').addEventListener('click', adicionarLista);
+
+
+
+
         function adicionarLista() {
+
             let container = document.getElementById('container')
+
+            let divLista = document.createElement('div')
             let input = document.createElement('input')
-            input.className = "tarefa1"
-            let divInput = document.createElement('div')
-            let buttonAdicionar = document.getElementById('adicionarLista')
 
-            divInput.className = "divInput"
-            let ulLista = document.createElement('ul')
+            const buttonAddCartao = document.createElement('button')
+            buttonAddCartao.textContent = 'Adicionar cartão'
 
+            buttonAddCartao.addEventListener('click', () => adicionarCartao(divLista))
 
-            buttonAdicionar.addEventListener('click', () => {
-                let li = document.createElement('li')
-                if (input.value == "") {
-                    return
-                }
+            const ul = document.createElement('ul');
 
-                li.innerHTML = `<p>${input.value}</p><button onclick="adicionarCartao(this)">Adicionar outro cartão</button>`
+            divLista.appendChild(input);
+            divLista.appendChild(buttonAddCartao);
+            divLista.appendChild(ul);
 
-                ulLista.appendChild(li)
-                divInput.appendChild(ulLista)
-            })
-
-            divInput.appendChild(input)
-            divInput.appendChild(buttonAdicionar)
-            container.appendChild(divInput)
+            container.appendChild(divLista);
         }
 
-        function adicionarCartao(botao) {
-            let li = botao.parentElement
-            let input = document.createElement('input')
-            let divInput = document.createElement('div')
 
-            let buttonAdicionar = document.createElement('button')
-            buttonAdicionar.textContent = 'Adicionar cartão'
 
-            buttonAdicionar.addEventListener('click', () => {
-                if (input.value == "") {
-                    return
-                }
 
-                let divCartao = document.createElement('div')
-                divCartao.textContent = input.value
-                divInput.appendChild(divCartao)
-                li.appendChild(divInput)
-            })
+        function adicionarCartao(lista) {
+            const ul = lista.querySelector('ul');
+            const inputCartao = document.createElement('input');
+            inputCartao.placeholder = 'Título do cartão';
 
-            divInput.appendChild(input)
-            divInput.appendChild(buttonAdicionar)
-            li.appendChild(divInput)
+            const botao = document.createElement('button');
+            botao.textContent = 'Adicionar';
+            botao.addEventListener('click', () => {
+                if (inputCartao.value.trim() === '') return;
+
+                const li = document.createElement('li');
+                li.classList.add('cartao');
+                li.textContent = inputCartao.value;
+
+                ul.appendChild(li);
+                inputCartao.value = '';
+            });
+
+            lista.appendChild(inputCartao);
+            lista.appendChild(botao);
         }
 
 
