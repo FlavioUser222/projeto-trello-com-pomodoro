@@ -51,9 +51,10 @@
             divInput.className = "divInput"
             let buttonAdicionar = document.createElement('button')
             buttonAdicionar.textContent = 'Adicionar outra lista'
+            let ulLista = document.createElement('ul')
+     
 
             buttonAdicionar.addEventListener('click', () => {
-                let ulLista = document.createElement('ul')
                 let li = document.createElement('li')
                 if (input.value == "") {
                     return
