@@ -33,9 +33,24 @@
         display: flex;
         flex-direction: column;
     }
+
+    header {
+        background-color: #4e4e4e;
+        width: 100%;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
 </style>
 
 <body>
+
+    <header>
+
+    </header>
 
     <div class="container" id="container">
         <button onclick="adicionarLista()">Adicionar outra lista</button>
@@ -52,7 +67,7 @@
             let buttonAdicionar = document.createElement('button')
             buttonAdicionar.textContent = 'Adicionar outra lista'
             let ulLista = document.createElement('ul')
-     
+
 
             buttonAdicionar.addEventListener('click', () => {
                 let li = document.createElement('li')
