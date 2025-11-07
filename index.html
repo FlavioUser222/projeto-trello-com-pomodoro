@@ -45,6 +45,7 @@
         align-items: flex-start;
         justify-content: flex-start;
     }
+
 </style>
 
 <body>
@@ -82,13 +83,14 @@
             divLista.appendChild(buttonAddCartao);
             divLista.appendChild(ul);
 
-            container.appendChild(divLista);
+            container.appendChild(divLista)
         }
 
 
 
 
         function adicionarCartao(lista) {
+
             const ul = lista.querySelector('ul');
             const inputCartao = document.createElement('input');
             inputCartao.placeholder = 'Título do cartão';
