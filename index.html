@@ -13,10 +13,33 @@
         box-sizing: border-box;
     }
 
+    .container {
+        display: flex;
+        gap: 10px;
+        padding: 20px;
+        overflow-x: auto;
+    }
+
     .divInput {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        width: 200px;
+        min-width: 200px;
         display: flex;
         flex-direction: column;
-        width: 30%;
+        gap: 5px;
+    }
+
+    .add-list {
+        align-self: flex-end;
+        height: fit-content;
+        padding: 10px;
+        background: #e0e0e0;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
     }
 
     li {
@@ -28,41 +51,57 @@
 <body>
 
     <div class="container" id="container">
-        <button onclick="adicionarLista()">Adicionar outra lista</button>
+        <button id="btnAddLista" class="add-list" onclick="adicionarLista()">Adicionar outra lista</button>
     </div>
 
     <script>
 
         function adicionarLista() {
             let container = document.getElementById('container')
+            let botaoAddLista = document.getElementById('btnAddLista')
+
             let input = document.createElement('input')
             input.className = "tarefa1"
+
             let divInput = document.createElement('div')
             divInput.className = "divInput"
+
             let buttonAdicionar = document.createElement('button')
             buttonAdicionar.textContent = 'Adicionar'
+            let ulLista = document.createElement('ul')
 
             buttonAdicionar.addEventListener('click', () => {
-                let ulLista = document.createElement('ul')
-                let li = document.createElement('li')
                 if (input.value == "") {
                     return
                 }
-                li.innerHTML = `<p>${input.value}</p><button onclick="adicionarCartao(this)">Adicionar Cartão</button>`
+
+                let li = document.createElement('li')
+                li.innerHTML = `<p>${input.value}</p>
+                <ul class="cards"></ul>
+                <button onclick="adicionarCartao(this)">Adicionar Cartão</button>
+                `
 
                 ulLista.appendChild(li)
-                divInput.appendChild(ulLista)
+
+                input.remove()
+                buttonAdicionar.remove()
             })
 
             divInput.appendChild(input)
             divInput.appendChild(buttonAdicionar)
-            container.appendChild(divInput)
+            divInput.appendChild(ulLista)
+
+            container.insertBefore(divInput, botaoAddLista);
+
+
         }
 
         function adicionarCartao(botao) {
             let li = botao.parentElement
+            let ulCartao = li.querySelector('.cards')
+            botao.remove()
+
             let input = document.createElement('input')
-            let divInput = document.createElement('div')
             let buttonAdicionar = document.createElement('button')
             buttonAdicionar.textContent = 'Adicionar cartão'
 
@@ -71,18 +110,24 @@
                 if (input.value == "") {
                     return
                 }
-                let divCartao = document.createElement('div')
-                divCartao.textContent = input.value
-                li.appendChild(divCartao)
+                let liCard = document.createElement('li')
+                liCard.textContent = input.value
+                ulCartao.appendChild(liCard)
+
+                input.remove()
+                buttonAdicionar.remove()
+
+                let novoBotao = document.createElement('button')
+                novoBotao.textContent = 'Adicionar Cartão'
+                novoBotao.onclick = function () { adicionarCartao(novoBotao) }
+                li.appendChild(novoBotao)
+
+
             })
 
             li.appendChild(input)
             li.appendChild(buttonAdicionar)
-
-
         }
-
-
 
     </script>
 </body>
