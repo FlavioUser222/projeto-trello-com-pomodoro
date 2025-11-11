@@ -42,10 +42,27 @@
         cursor: pointer;
     }
 
+    .cards {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
     li {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .divCard {
+        display: flex;
+        width: 90%;
+        padding: 15px 8px;
+        border: 1px solid grey;
+        border-radius: 8px;
     }
 </style>
 
@@ -112,9 +129,10 @@
                     return
                 }
                 let liCard = document.createElement('li')
-                let buttonCard = document.createElement('a')
-                buttonCard.textContent = input.value
-                liCard.appendChild(buttonCard)
+                let divCard = document.createElement('div')
+                divCard.className = "divCard"
+                divCard.textContent = input.value
+                liCard.appendChild(divCard)
                 ulCartao.appendChild(liCard)
 
                 input.remove()
