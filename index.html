@@ -45,6 +45,7 @@
     li {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 </style>
 
@@ -67,7 +68,7 @@
             divInput.className = "divInput"
 
             let buttonAdicionar = document.createElement('button')
-            buttonAdicionar.textContent = 'Adicionar'
+            buttonAdicionar.textContent = 'Nome da lista'
             let ulLista = document.createElement('ul')
 
             buttonAdicionar.addEventListener('click', () => {
@@ -111,7 +112,9 @@
                     return
                 }
                 let liCard = document.createElement('li')
-                liCard.textContent = input.value
+                let buttonCard = document.createElement('a')
+                buttonCard.textContent = input.value
+                liCard.appendChild(buttonCard)
                 ulCartao.appendChild(liCard)
 
                 input.remove()
