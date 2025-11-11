@@ -72,6 +72,7 @@
     </div>
 
     <script>
+        let cardCounter = 0
 
         function adicionarLista() {
             let container = document.getElementById('container')
@@ -94,7 +95,7 @@
 
                 let li = document.createElement('li')
                 li.innerHTML = `<p>${input.value}</p>
-                <ul class="cards"></ul>
+                <ul class="cards" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)"></ul>
                 <button onclick="adicionarCartao(this)">Adicionar Cartão</button>
                 `
 
@@ -130,6 +131,13 @@
                 let liCard = document.createElement('li')
                 let divCard = document.createElement('div')
                 divCard.className = "divCard"
+                divCard.draggable = true
+
+                divCard.draggable = true
+                divCard.id = `card-${cardCounter++}`
+                divCard.addEventListener('dragstart', dragstartHandler)
+
+
                 divCard.textContent = input.value
                 liCard.appendChild(divCard)
                 ulCartao.appendChild(liCard)
@@ -148,6 +156,25 @@
             li.appendChild(input)
             li.appendChild(buttonAdicionar)
         }
+
+
+        function dragstartHandler(ev) {
+            ev.dataTransfer.setData("text", ev.target.id)
+        }
+
+        function dragoverHandler(ev) {
+            ev.preventDefault()
+        }
+
+        function dropHandler(ev) {
+            ev.preventDefault()
+            const data = ev.dataTransfer.getData("text")
+            const card = document.getElementById(data)
+            if (ev.target.classList.contains('cards')) {
+                ev.target.appendChild(card.parentElement)
+            }
+        }
+
 
     </script>
 </body>
